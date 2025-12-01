@@ -1,0 +1,84 @@
+{
+  "name": "auditrail-sdk",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/auditrail-sdk/auditrail_sdk",
+  "targets": {
+    "lock": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry lock",
+        "cwd": "packages/auditrail-sdk"
+      }
+    },
+    "add": {
+      "executor": "@nxlv/python:add",
+      "options": {}
+    },
+    "update": {
+      "executor": "@nxlv/python:update",
+      "options": {}
+    },
+    "remove": {
+      "executor": "@nxlv/python:remove",
+      "options": {}
+    },
+    "build": {
+      "executor": "@nxlv/python:build",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "outputPath": "packages/auditrail-sdk/dist",
+        "publish": false,
+        "lockedVersions": true,
+        "bundleLocalDependencies": true
+      }
+    },
+    "install": {
+      "executor": "@nxlv/python:install",
+      "options": {
+        "silent": false,
+        "args": "",
+        "cacheDir": "/tmp/pypoetry-cache",
+        "verbose": false,
+        "debug": false
+      }
+    },
+    "lint": {
+      "executor": "@nxlv/python:flake8",
+      "outputs": ["{workspaceRoot}/reports/packages/auditrail-sdk/pylint.txt"],
+      "options": {
+        "outputFile": "reports/packages/auditrail-sdk/pylint.txt"
+      }
+    },
+    "type-check": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "poetry run mypy auditrail/sdk",
+        "cwd": "packages/auditrail-sdk"
+      }
+    },
+    "test": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [
+        "{workspaceRoot}/reports/packages/auditrail-sdk/unittests",
+        "{workspaceRoot}/coverage/packages/auditrail-sdk"
+      ],
+      "options": {
+        "command": "poetry run pytest tests/",
+        "cwd": "packages/auditrail-sdk"
+      }
+    },
+    "build-release": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "commands": [
+          "chmod +x ../../scripts/build-release.sh",
+          "../../scripts/build-release.sh"
+        ],
+        "cwd": "packages/auditrail-sdk"
+      }
+    }
+  },
+  "tags": ["sdk"]
+}
